@@ -1,10 +1,10 @@
 from sqlalchemy.orm import Session
-
+from app.interfaces import TaskRepositoryInterface
 from app.models import Task
 from app.schemas import TaskCreate, TaskUpdate
 
 
-class TaskRepository:
+class TaskRepository(TaskRepositoryInterface):
 
     def __init__(self, db: Session):
         self.db = db

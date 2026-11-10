@@ -1,6 +1,13 @@
+
+from app.interfaces import TaskRepositoryInterface
+
+
 class TaskService:
 
-    def __init__(self, repository):
+    def __init__(
+        self,
+        repository: TaskRepositoryInterface
+    ):
         self.repository = repository
 
     def get_all_tasks(self):
