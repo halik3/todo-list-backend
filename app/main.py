@@ -7,8 +7,6 @@ from app.routers import tasks
 
 
 # Create database tables
-Base.metadata.create_all(bind=engine)
-
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     Base.metadata.create_all(bind=engine)
