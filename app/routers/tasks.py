@@ -1,8 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
-
-from app.database import get_db
-from app.repository import TaskRepository
+from app.dependencies import get_task_service
 from app.services import TaskService
 from app.schemas import (
     TaskCreate,
@@ -14,12 +11,6 @@ router = APIRouter(
     prefix="/tasks",
     tags=["Tasks"]
 )
-
-
-def get_task_service(db: Session = Depends(get_db)):
-    repository = TaskRepository(db)
-    return TaskService(repository)
-
 
 @router.get("/", response_model=list[TaskResponse])
 def get_tasks(
