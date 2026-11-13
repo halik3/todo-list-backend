@@ -9,11 +9,20 @@ DATABASE_URL = os.getenv(
     "sqlite:///./todo.db"
 )
 
+if DATABASE_URL.startswith("postgresql://"):
+    DATABASE_URL = DATABASE_URL.replace(
+        "postgresql://",
+        "postgresql+psycopg2://",
+        1
+    )
+
 # SQLite membutuhkan konfigurasi khusus.
 connect_args = {}
 
 if DATABASE_URL.startswith("sqlite"):
     connect_args = {"check_same_thread": False}
+
+
 
 engine = create_engine(
     DATABASE_URL,
